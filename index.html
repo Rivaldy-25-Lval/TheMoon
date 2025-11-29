@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BRIND - Event Horizon</title>
     
-    <!-- 1. Mengambil Tailwind CSS (untuk styling) -->
+    <!-- 1. Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- 2. Mengambil React & ReactDOM (agar kode React jalan) -->
+    <!-- 2. React & ReactDOM -->
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     
-    <!-- 3. Mengambil Babel (untuk menerjemahkan kode React ke bahasa browser) -->
+    <!-- 3. Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-    <!-- 4. Mengambil Icon (Lucide) -->
+    <!-- 4. Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
@@ -49,40 +49,16 @@
 </head>
 <body class="bg-slate-950">
 
-    <!-- Tempat Aplikasi React Akan Muncul -->
     <div id="root"></div>
 
-    <!-- Script React Anda -->
     <script type="text/babel">
         const { useState, useEffect } = React;
-        // Icon SVG Manual (karena CDN Lucide React agak beda cara pakainya)
-        const IconPlay = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="5 3 19 12 5 21 5 3"/></svg>;
-        const IconPause = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>;
-        const IconVolume2 = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>;
-        const IconVolumeX = () => <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>;
+        
+        // Icon Panah Saja (Karena tombol play/mute sudah dihapus)
         const IconArrowRight = () => <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>;
 
         const AnimatedBackgroundContainer = () => {
             const [isGradientBtnHovered, setIsGradientBtnHovered] = useState(false);
-            const [isPlaying, setIsPlaying] = useState(true);
-            const [isMuted, setIsMuted] = useState(true);
-
-            const togglePlay = () => {
-                const video = document.getElementById('bg-video');
-                if (video) {
-                    if (isPlaying) video.pause();
-                    else video.play();
-                    setIsPlaying(!isPlaying);
-                }
-            };
-
-            const toggleMute = () => {
-                const video = document.getElementById('bg-video');
-                if (video) {
-                    video.muted = !isMuted;
-                    setIsMuted(!isMuted);
-                }
-            };
 
             return (
                 <div className="relative w-full min-h-screen overflow-hidden bg-slate-950 font-sans text-white flex items-center justify-center p-4">
@@ -99,12 +75,12 @@
                                 id="bg-video"
                                 autoPlay
                                 loop
-                                muted={isMuted}
+                                muted 
                                 playsInline
                                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 poster="https://hoirqrkdgbmvpwutwuwj-all.supabase.co/storage/v1/object/public/assets/assets/c06498e9-85e2-4173-a1f6-86b1267897f0_1600w.jpg"
                             >
-                                {/* NAMA FILE VIDEO HARUS SESUAI */}
+                                {/* NAMA FILE VIDEO HARUS SAMA DENGAN YANG DI GITHUB */}
                                 <source src="acheron-black-hole-honkai-star-rail-moewalls-com.mp4" type="video/mp4" />
                                 Your browser does not support the video tag.
                             </video>
@@ -168,17 +144,8 @@
                                     </div>
                                 </div>
 
-                                {/* Kanan: Kontrol Video */}
-                                <div className="lg:col-span-5 flex justify-end items-end h-full pb-10">
-                                    <div className="flex gap-2 bg-black/30 backdrop-blur-md p-2 rounded-full border border-white/10">
-                                        <button onClick={togglePlay} className="p-2 hover:bg-white/20 rounded-full transition-colors text-white/80 hover:text-white" title={isPlaying ? "Pause" : "Play"}>
-                                            {isPlaying ? <IconPause /> : <IconPlay />}
-                                        </button>
-                                        <button onClick={toggleMute} className="p-2 hover:bg-white/20 rounded-full transition-colors text-white/80 hover:text-white" title={isMuted ? "Unmute" : "Mute"}>
-                                            {isMuted ? <IconVolumeX /> : <IconVolume2 />}
-                                        </button>
-                                    </div>
-                                </div>
+                                {/* Kanan: Kosong (Tombol kontrol sudah dihapus) */}
+                                <div className="lg:col-span-5"></div>
 
                             </div>
                         </div>
@@ -187,7 +154,6 @@
             );
         };
 
-        // Render ke HTML
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<AnimatedBackgroundContainer />);
     </script>
